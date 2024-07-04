@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-object
+from django.urls import reverse
 # Create your models here.
 class Post(models.Model):
     # Status attribute for knowing status of posts (post is ready for publishing, or draft post maybe will be updated)
@@ -28,3 +28,6 @@ class Post(models.Model):
     # gives the class title readable on the front of the site, you can put 'body' attribute instead of 'title' 
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        return reverse("blog:post_details", args=[self.id])
+    

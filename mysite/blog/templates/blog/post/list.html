@@ -6,7 +6,9 @@
   <h1>My Blog</h1>
   {% for post in posts %}
     {% comment %}'post_details' in url from path function in blog in attribute called 'name', and 'blog' in url it's namespace{% endcomment %}
-    <h2><a href="{% url 'blog:post_details' post.id %}">{{ post.title }}</a></h2>
+    {% comment %} <h2><a href="{% url 'blog:post_details' post.id %}">{{ post.title }}</a></h2> {% endcomment %}
+    {% comment %}Using Canonical Urls{% endcomment %}
+    <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
     <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
     {{ post.body|truncatewords:30|linebreaks }}
   {% endfor %}
