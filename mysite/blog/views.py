@@ -7,23 +7,23 @@ from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
 
-def post_list(request):
-    post_list = Post.objects.all()
-    paginator = Paginator(post_list,2)
-    page_number = request.GET.get('page',1)
-    try:
-        posts = paginator.page(page_number)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    return render(request,'blog/post/list.html',{'posts':posts})
-# class PostListView(ListView):
+# def post_list(request):
+#     post_list = Post.objects.all()
+#     paginator = Paginator(post_list,2)
+#     page_number = request.GET.get('page',1)
+#     try:
+#         posts = paginator.page(page_number)
+#     except EmptyPage:
+#         posts = paginator.page(paginator.num_pages)
+#     except PageNotAnInteger:
+#         posts = paginator.page(1)
+#     return render(request,'blog/post/list.html',{'posts':posts})
+class PostListView(ListView):
 #     """ Alternative post list view  """
-#     model = Post
-#     context_object_name = 'posts'
-#     paginate_by = 1
-#     tmeplate_name = 'blog/post/list.html'
+     model = Post
+     context_object_name = 'posts'
+     paginate_by = 2
+     template_name = 'blog/post/list.html'
 
 def post_detail(request,id):
     # The first way
